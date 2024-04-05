@@ -26,23 +26,23 @@
                 <form action="" class="myForm">
                     <div>
                         <label for="">ชื่อ นามสกุล</label>
-                        <input type="text" class="form-control" name="name" id="">
+                        <input type="text" class="form-control" name="name" id="name">
                     </div>
                     <div>
                         <label for="">เบอร์โทร</label>
-                        <input type="text" class="form-control" name="phone" id="">
+                        <input type="text" class="form-control" name="phone" id="phone">
                     </div>
                     <div>
                         <label for="">สินค้า</label>
-                        <input type="text" class="form-control" name="device" id="">
+                        <input type="text" class="form-control" name="device" id="device">
                     </div>
                     <div>
                         <label for="">ข้อเสนอแนะ</label>
-                        <input type="text" class="form-control" name="problem" id="">
+                        <input type="text" class="form-control" name="problem" id="problem">
                     </div>
                     <div>
                         <label for="">สาขาที่ซื้อ</label>
-                        <input type="text" class="form-control" name="place" id="">
+                        <input type="text" class="form-control" name="place" id="place">
                     </div>
                     <div class="mt-3">
                         <button type="submit" class="btn btn-info">บันทึกข้อมูล</button>
@@ -74,7 +74,9 @@
                 uid: liff.getDecodedIDToken().sub,
                 name: $('#name').val(),
                 phone: $('#phone').val(),
-                device: $('#device').val()
+                device: $('#device').val(),
+                problem: $('#problem').val(),
+                place: $('#place').val()
             }
         }
     </script>
