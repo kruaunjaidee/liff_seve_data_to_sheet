@@ -1,51 +1,87 @@
-<html>
+<!doctype html>
+<html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Coupon App</title>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.js"></script>
+    <!-- Bootstrap CSS v5.2.1 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
 </head>
-<body><center>
-  <p id="nnname">ชื่อผู้ใช้งานโค๊ด</p><input type="text" id="nname" name="name"><br>
-  <p id="scanCode"></p>
-  <p id="ncode"></p>
-  <p id="descc"></p>
-  <!--<p id="nxname"></p>-->
-  <p>
-    <button id="btnScanCode" onclick="scanCode();">Scan Code</button>
-    <button id="btnClose" hidden="true" onclick="liff.closeWindow();">Close</button>
-  </p>
-</center>
-  <script src="https://static.line-scdn.net/liff/edge/2.1/liff.js"></script>
-  <script>
-    function scanCode() {
-        var xx = document.getElementsByName("name")[0].value;
-        document.getElementById("scanCode").textContent = "กรุณารอสักครู่";
-        liff.scanCode().then(result => {
-        const stringifiedResult = JSON.stringify(result);
-        obj = JSON.parse(stringifiedResult);
-        var xmlhttp = new XMLHttpRequest();
-        var url = "https://script.google.com/macros/s/AKfycbw5CrtlMDLpsFjOPWIGylftNqw9SZF01rgztvmplfy7Vk0KujCL/exec";
-        var theUrl = url+"?value="+obj.value+"&name="+xx;
-        xmlhttp.open('GET', theUrl);
-        xmlhttp.send();
-            xmlhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            var jsonResponse = JSON.parse(this.responseText);
+
+<body>
+    <div class="" style="display: flex; align-items: center; justify-content: center;">
+        <div class="card text-start mt-5"
+            style="width: 18rem; justify-content: center; align-items: center; display: flex;">
+            <img class="text-center mt-3" style="width: 60px;"
+                src="https://kruaunjaidee.github.io/logo-klaeng/Icon%20klaeng.png" alt="Title" />
+            <div class="card-body">
+                <h4 class="card-title">บันทึกรับประกันสินค้า</h4>
+                <form action="" class="myForm">
+                    <div>
+                        <label for="">ชื่อ นามสกุล</label>
+                        <input type="text" class="form-control" name="name" id="">
+                    </div>
+                    <div>
+                        <label for="">เบอร์โทร</label>
+                        <input type="text" class="form-control" name="phone" id="">
+                    </div>
+                    <div>
+                        <label for="">สินค้า</label>
+                        <input type="text" class="form-control" name="device" id="">
+                    </div>
+                    <div>
+                        <label for="">ข้อเสนอแนะ</label>
+                        <input type="text" class="form-control" name="problem" id="">
+                    </div>
+                    <div>
+                        <label for="">สาขาที่ซื้อ</label>
+                        <input type="text" class="form-control" name="place" id="">
+                    </div>
+                    <div class="mt-3">
+                        <button type="submit" class="btn btn-info">บันทึกข้อมูล</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const scriptUrl = 'https://script.google.com/macros/s/AKfycbx_3Jhc-PBzxyAcp8ADj0xwEMXk0u_hQMjKVDgcPuWiZoOpGrOMjVReZmMwIxOpf9rm/exec'
+        var uid
+        $(document).ready(() => {
+            liff.init({
+                liffId: '',
+                withLoginOnExternalBrowser: true
+            })
+            liff.ready.then(() => {
+                console.log('liff ready !')
+            })
+        })
+
+        function submitForm() {
+            $.LoadingOverlay('show')
+            let data = {
+                opt: 'savedata',
+                uid: liff.getDecodedIDToken().sub,
+                name: $('#name').val(),
+                phone: $('#phone').val(),
+                device: $('#device').val()
+            }
         }
-        document.getElementById("scanCode").textContent = jsonResponse.xstatus;
-        document.getElementById("ncode").textContent = "โค๊ด : "+obj.value;
-        //document.getElementById("nxname").textContent = "ชื่อ : "+xx;
-        document.getElementById("descc").textContent = jsonResponse.desc;
-        document.getElementById("nname").hidden = true;
-        document.getElementById("nnname").hidden = true;
+    </script>
+    <!-- Bootstrap JavaScript Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
 
-        document.getElementById("btnScanCode").hidden = true;
-        document.getElementById("btnClose").hidden = false;
-    };
-
-      });
-    }
-    liff.init({ liffId: "1595444618-ng4aaVXp" }, () => {}, err => console.error(err.code, error.message));
-  </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+        integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+        crossorigin="anonymous"></script>
 </body>
+
 </html>
